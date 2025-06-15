@@ -2,10 +2,11 @@ function setup() {
   createCanvas(400, 400);
 }
 
-let xJogador1 = 0;
-let xJogador2 = 0;
-let xJogador3 = 0;
-let xJogador4 = 0;
+let xJogador = [0,0,0,0,0]
+let yJogador = [50,130,200,280,370]
+let jogador = ["🦋", "🐞", "🐝","🦗","🐜"];
+let teclas = ["z", "a", "m", "n", "v"];
+let quantidade = jogador.length;
 
 function draw() {
   ativaJogo();
@@ -24,46 +25,39 @@ function ativaJogo() {
 
 function desenhaJogadores() {
   textSize(40);
-  text("🦋", xJogador1, 50);
-  text("🐞", xJogador2, 150);
-  text("🐝", xJogador3, 250);
-  text("🦗", xJogador4, 350);
+  for (let i = 0; i < 5; i++) {
+    text(jogador[i], xJogador[i], yJogador[i]);
+  }
+
 }
 
 function desenhaLinhaDeChegada() {
+ fill("white");
   rect(350, 0, 10, 400);
+  fill("black");
+  for (let yAtual = 0; yAtual < 400; yAtual += 20) {
+    rect(350, yAtual, 10, 10);
+ }
+  
 }
-
 function verificaVencedor() {
-  if (xJogador1 > 350) {
-    text("Jogador 1 venceu!", 0, 200);
-    noLoop();
+  for (let i = 0; i < 5; i++) {
+    if (xJogador[i] > 350) {
+      text(jogador[i] + " venceu!", 50, 200);
+      noLoop();
+    }
   }
-  if (xJogador2 > 350) {
-    text("Jogador 2 venceu!", 0, 200);
-    noLoop();
-  }
-  if (xJogador3 > 350) {
-    text("Jogador 3 venceu!", 0, 200);
-    noLoop();
 }
-  if (xJogador4 > 350) {
+  if (xJogador [3] > 350) {
     text("Jogador 4 venceu!", 0, 200);
     noLoop();
-  }
+  
 }
 
 function keyReleased() {
-  if (key == "z") {
-    xJogador1 += random(20);
-  }
-  if (key == "a") {
-    xJogador2 += random(20);
-  }
-  if (key == "m") {
-    xJogador3 += random(20);
-  }
-  if (key == "n") {
-    xJogador4 += random(20);
+  for (let i = 0; i < quantidade; i++) {
+    if (key == teclas[i]) {
+      xJogador[i] += random(20);
+    }
   }
 }
